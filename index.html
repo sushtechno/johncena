@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkyFetch Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>SkyFetch</h1>
+      <p class="subtitle">Search weather in any city.</p>
+
+      <section class="search-section" aria-label="Weather search">
+        <input
+          id="cityInput"
+          type="text"
+          placeholder="Enter city name"
+          autocomplete="off"
+        />
+        <button id="searchBtn" type="button">Search</button>
+      </section>
+
+      <section id="weatherContainer" class="weather-container" aria-live="polite">
+        <p class="welcome">Search for a city to see current weather details.</p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
