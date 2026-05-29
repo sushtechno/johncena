@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DropForge 7 — Nu-Metal Guitar Synth</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero panel">
+        <div>
+          <p class="eyebrow">DropForge 7</p>
+          <h1>Baritone / 7-string nu-metal guitar synthesizer</h1>
+          <p class="lede">
+            A low-latency Web Audio rig voiced for tight palm-muted chugs, high-gain amps,
+            loaded stompboxes, cabinet IR coloration, MIDI-mappable controls, and ASIO-ready
+            recording workflows.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="startAudio" class="primary">Arm audio engine</button>
+          <button id="panic" class="ghost">Panic / mute</button>
+          <div id="engineStatus" class="status">Engine idle</div>
+        </div>
+      </section>
+
+      <section class="panel preset-strip">
+        <label>
+          Preset
+          <select id="presetSelect"></select>
+        </label>
+        <button id="savePreset" class="ghost">Snapshot custom preset</button>
+        <button id="midiLearn" class="ghost">MIDI learn: off</button>
+        <div id="midiStatus" class="status">MIDI disconnected</div>
+      </section>
+
+      <section class="grid">
+        <article class="panel fretboard">
+          <div class="section-title">
+            <h2>7-string chug pad</h2>
+            <span>Computer keys: A S D F G H J</span>
+          </div>
+          <div id="stringPad" class="string-pad"></div>
+        </article>
+
+        <article class="panel meters">
+          <div class="section-title"><h2>Live rig telemetry</h2></div>
+          <canvas id="scope" width="560" height="180" aria-label="oscilloscope"></canvas>
+          <div class="meter-row">
+            <span>Input gate</span><meter id="gateMeter" min="0" max="1" value="0"></meter>
+            <span id="latencyReadout">Latency: --</span>
+          </div>
+        </article>
+      </section>
+
+      <section id="controls" class="controls"></section>
+
+      <section class="grid">
+        <article class="panel">
+          <div class="section-title">
+            <h2>Custom cabinet IR</h2>
+            <span>WAV/AIFF impulse responses are convolved after the amp</span>
+          </div>
+          <input id="irUpload" type="file" accept="audio/*" />
+          <div class="ir-tools">
+            <button data-ir="oversized412">Oversized 4×12</button>
+            <button data-ir="scooped412">Scooped 4×12</button>
+            <button data-ir="baritone212">Baritone 2×12</button>
+          </div>
+          <p id="irStatus" class="status">Factory IR: Oversized 4×12</p>
+        </article>
+
+        <article class="panel">
+          <div class="section-title">
+            <h2>Low-latency / ASIO interface</h2>
+            <span>For real-time tracking rigs</span>
+          </div>
+          <div class="asio-grid">
+            <label>Driver mode
+              <select id="driverMode">
+                <option value="webAudio">Web Audio interactive</option>
+                <option value="asio">External ASIO host / loopback</option>
+                <option value="wasapi">WASAPI exclusive / CoreAudio class-compliant</option>
+              </select>
+            </label>
+            <label>Buffer target
+              <select id="bufferTarget">
+                <option value="64">64 samples</option>
+                <option value="128" selected>128 samples</option>
+                <option value="256">256 samples</option>
+              </select>
+            </label>
+          </div>
+          <p class="note">
+            Browsers cannot open native ASIO drivers directly; use this rig through a browser audio
+            interface, or route it into an ASIO-capable host with your interface driver at 64–128
+            samples for tight monitoring.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel research">
+        <h2>Voicing notes baked into the engine</h2>
+        <ul>
+          <li>AudioWorklet processing keeps the synth off the UI thread for low-latency note response.</li>
+          <li>7-string presets are tuned around low B and drop A; baritone presets sit lower with longer virtual scale tension.</li>
+          <li>Pre-emphasis, asymmetric clipping, power-amp sag, and post-cab filtering are stacked for saturated but percussive distortion.</li>
+          <li>The noise gate uses fast attack/release with hysteresis so palm mutes clamp down between chugs.</li>
+          <li>MIDI learn maps hardware CCs to every amp, stomp, cabinet, gate, and performance parameter.</li>
+        </ul>
+      </section>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
