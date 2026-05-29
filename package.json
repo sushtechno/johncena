@@ -1,0 +1,19 @@
+{
+  "name": "johncena-nu-metal-guitar-synth",
+  "version": "1.0.0",
+  "description": "Browser-based nu-metal 7-string/baritone guitar synthesizer with high-gain amp, cab IRs, stompboxes, gate, MIDI mapping, and low-latency recording guidance.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 5173",
+    "check": "node --check app.js && node --check chug-processor.js"
+  },
+  "keywords": [
+    "web-audio",
+    "guitar-synth",
+    "nu-metal",
+    "midi",
+    "cabinet-ir",
+    "noise-gate"
+  ],
+  "license": "MIT"
+}
